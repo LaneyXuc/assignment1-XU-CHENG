@@ -14,7 +14,7 @@ def text2story(image_description):
     story_generator = pipeline("text-generation", model="roneneldan/TinyStories-33M")
 
     prompt = (
-        "In a magical little world, "
+        "One day, "
         + image_description +
         "."
     )
@@ -40,12 +40,12 @@ def text2audio(story_text):
     return audio_output
 
 # main part
-st.set_page_config(page_title="Magic Story App", page_icon="✨")
+st.set_page_config(page_title="Story Generator", page_icon="📖")
 
-st.title("Magic Story App")
+st.title("Story Generator")
 
 uploaded_image = st.file_uploader(
-    "Upload your picture",
+    "Upload an image",
     type=["jpg", "jpeg", "png"]
 )
 
@@ -53,11 +53,11 @@ if uploaded_image is not None:
 
     st.image(
         uploaded_image,
-        caption="Selected Picture",
+        caption="Uploaded Image",
         use_container_width=True
     )
 
-    if st.button("Create Magic Story"):
+    if st.button("Generate Story"):
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
             temp_file.write(uploaded_image.getvalue())
